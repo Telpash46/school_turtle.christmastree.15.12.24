@@ -52,11 +52,11 @@ def blink_star_center(x, y):
     colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange']
     while True:
         t.penup()
-        t.goto(x, y - 15)  # Опускаемся немного ниже центра звезды
+        t.goto(x, y - 15)
         t.pendown()
         t.color(random.choice(colors))
         t.begin_fill()
-        t.setheading(0)  # Устанавливаем начальное направление (вниз)
+        t.setheading(0)
 
         t.forward(20)
 
@@ -78,8 +78,21 @@ def blink_star_center(x, y):
 tree(20, n)
 add_star(-50, 225, 'orange')
 
-def generate_data():
+def add_image(path, x, y):
+    t.shapesize(stretch_wid=0.1, stretch_len=0.1)  # Уменьшаем размер изображения
+    screen.addshape(path)  # Добавляем изображение как форму
+    t.shape(path)  # Устанавливаем форму черепашки как изображение
+    t.penup()
+    t.goto(x, y)  # Перемещаем черепашку в правый нижний угол (снизу справа)
+    t.pendown()
+    t.stamp()  # Отпечаток изображения
+    t.shape("classic")
 
+# Добавляем изображение кролика
+add_image("rabbit.gif", 200, -100)
+add_image("snowman.gif", -200, -100)
+
+def generate_data():
     if len(allowed_x) > 0:
         coords_index = random.randint(0, len(allowed_x) - 1)
         size = random.randint(10, 15)
